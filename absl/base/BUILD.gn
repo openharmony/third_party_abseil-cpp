@@ -1,0 +1,118 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../copts/configure_copts.gni")
+import("//developtools/profiler/build/config.gni")
+
+ohos_shared_library("absl_base") {
+  sources = [
+    "internal/cycleclock.cc",
+    "internal/spinlock.cc",
+    "internal/sysinfo.cc",
+    "internal/thread_identity.cc",
+    "internal/unscaledcycleclock.cc",
+  ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  public_deps = [
+    ":absl_log_severity",
+    ":absl_raw_logging_internal",
+    ":absl_spinlock_wait",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_raw_logging_internal") {
+  sources = [ "internal/raw_logging.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  deps = [ ":absl_log_severity" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_log_severity") {
+  sources = [ "log_severity.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_spinlock_wait") {
+  sources = [
+    "internal/spinlock_akaros.inc",
+    "internal/spinlock_linux.inc",
+    "internal/spinlock_posix.inc",
+    "internal/spinlock_wait.cc",
+    "internal/spinlock_win32.inc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_dynamic_annotations") {
+  sources = [ "dynamic_annotations.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_malloc_internal") {
+  sources = [ "internal/low_level_alloc.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  deps = [
+    ":absl_base",
+    ":absl_spinlock_wait",
+    "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_exponential_biased") {
+  sources = [ "internal/exponential_biased.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_throw_delegate") {
+  sources = [ "internal/throw_delegate.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+  deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}

@@ -1,0 +1,49 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("../../../copts/configure_copts.gni")
+import("//developtools/profiler/build/config.gni")
+
+ohos_shared_library("absl_civil_time") {
+  sources = [ "src/civil_time_detail.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_time_zone") {
+  sources = [
+    "src/time_zone_fixed.cc",
+    "src/time_zone_fixed.h",
+    "src/time_zone_format.cc",
+    "src/time_zone_if.cc",
+    "src/time_zone_if.h",
+    "src/time_zone_impl.cc",
+    "src/time_zone_impl.h",
+    "src/time_zone_info.cc",
+    "src/time_zone_info.h",
+    "src/time_zone_libc.cc",
+    "src/time_zone_libc.h",
+    "src/time_zone_lookup.cc",
+    "src/time_zone_posix.cc",
+    "src/time_zone_posix.h",
+    "src/tzfile.h",
+    "src/zone_info_source.cc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  deps = [ ":absl_civil_time" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
