@@ -35,20 +35,3 @@ ohos_shared_library("absl_status") {
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
 }
 
-ohos_shared_library("absl_statusor") {
-  sources = [
-    "internal/statusor_internal.h"
-  ]
-
-  include_dirs = [ "${ABSEIL_DIR}/" ]
-
-  cflags = ABSL_DEFAULT_COPTS
-
-  deps = [
-    ":absl_status",
-    "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
-    "${ABSEIL_DIR}/absl/strings:absl_strings",
-  ]
-  install_enable = true
-  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
-}
