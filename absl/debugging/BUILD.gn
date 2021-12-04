@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 config("cflags_config") {
   cflags = ABSL_DEFAULT_COPTS
@@ -36,8 +36,9 @@ ohos_shared_library("absl_stacktrace") {
 
   deps = [ ":absl_debugging_internal" ]
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_symbolize") {
@@ -62,8 +63,9 @@ ohos_shared_library("absl_symbolize") {
     "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
     "${ABSEIL_DIR}/absl/strings:absl_strings",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_debugging_internal") {
@@ -75,13 +77,15 @@ ohos_shared_library("absl_debugging_internal") {
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
-  deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
+  deps = [
     "${ABSEIL_DIR}/absl/base:absl_dynamic_annotations",
+    "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
   ]
 
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_demangle_internal") {
@@ -90,6 +94,7 @@ ohos_shared_library("absl_demangle_internal") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

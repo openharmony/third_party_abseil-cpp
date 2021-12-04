@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_int128") {
   sources = [
@@ -26,4 +26,5 @@ ohos_shared_library("absl_int128") {
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

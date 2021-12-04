@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_base") {
   sources = [
@@ -33,8 +33,9 @@ ohos_shared_library("absl_base") {
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_raw_logging_internal") {
@@ -47,6 +48,7 @@ ohos_shared_library("absl_raw_logging_internal") {
   deps = [ ":absl_log_severity" ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_log_severity") {
@@ -55,6 +57,7 @@ ohos_shared_library("absl_log_severity") {
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_spinlock_wait") {
@@ -67,8 +70,9 @@ ohos_shared_library("absl_spinlock_wait") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_dynamic_annotations") {
@@ -76,9 +80,9 @@ ohos_shared_library("absl_dynamic_annotations") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
-
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_malloc_internal") {
@@ -92,8 +96,9 @@ ohos_shared_library("absl_malloc_internal") {
     ":absl_spinlock_wait",
     "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_exponential_biased") {
@@ -102,8 +107,9 @@ ohos_shared_library("absl_exponential_biased") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_throw_delegate") {
@@ -115,4 +121,5 @@ ohos_shared_library("absl_throw_delegate") {
   deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

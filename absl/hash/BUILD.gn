@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_hash") {
   sources = [
@@ -23,14 +23,16 @@ ohos_shared_library("absl_hash") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [ ":absl_city" ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_city") {
   sources = [ "internal/city.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

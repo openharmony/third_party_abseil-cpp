@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_graphcycles_internal") {
   sources = [ "internal/graphcycles.cc" ]
@@ -26,8 +26,9 @@ ohos_shared_library("absl_graphcycles_internal") {
     "${ABSEIL_DIR}/absl/base:absl_malloc_internal",
     "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_synchronization") {
@@ -54,6 +55,7 @@ ohos_shared_library("absl_synchronization") {
     "${ABSEIL_DIR}/absl/debugging:absl_symbolize",
     "${ABSEIL_DIR}/absl/time:absl_time",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

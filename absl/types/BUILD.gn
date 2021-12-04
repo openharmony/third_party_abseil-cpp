@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_bad_optional_access") {
   sources = [ "bad_optional_access.cc" ]
