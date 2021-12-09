@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 config("cflags_config") {
   cflags = [
@@ -98,6 +98,7 @@ ohos_shared_library("absl_strings") {
   ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_strings_internal") {
@@ -113,6 +114,7 @@ ohos_shared_library("absl_strings_internal") {
   deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_cord") {
@@ -126,8 +128,9 @@ ohos_shared_library("absl_cord") {
     "${ABSEIL_DIR}/absl/base:absl_throw_delegate",
     "${ABSEIL_DIR}/absl/strings:absl_strings",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_str_format_internal") {
@@ -149,4 +152,5 @@ ohos_shared_library("absl_str_format_internal") {
   ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

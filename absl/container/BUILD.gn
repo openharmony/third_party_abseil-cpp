@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_hashtablez_sampler") {
   sources = [
@@ -32,8 +32,9 @@ ohos_shared_library("absl_hashtablez_sampler") {
     "${ABSEIL_DIR}/absl/synchronization:absl_synchronization",
     "${ABSEIL_DIR}/absl/time:absl_time",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
 ohos_shared_library("absl_raw_hash_set") {
@@ -42,6 +43,7 @@ ohos_shared_library("absl_raw_hash_set") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }

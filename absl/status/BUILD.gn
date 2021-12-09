@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
-import("../copts/configure_copts.gni")
 import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
 
 ohos_shared_library("absl_status") {
   sources = [
@@ -31,7 +31,7 @@ ohos_shared_library("absl_status") {
     "${ABSEIL_DIR}/absl/strings:absl_cord",
     "${ABSEIL_DIR}/absl/strings:absl_strings",
   ]
-  install_enable = true
+  install_enable = false
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
 }
-
