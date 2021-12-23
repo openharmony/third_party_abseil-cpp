@@ -33,7 +33,9 @@ ohos_shared_library("absl_base") {
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
   ]
-  install_enable = false
+  if (target_cpu == "arm") {
+    install_enable = false
+  }
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
@@ -70,44 +72,9 @@ ohos_shared_library("absl_spinlock_wait") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  install_enable = false
-  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
-  part_name = "${OHOS_PROFILER_PART_NAME}"
-}
-
-ohos_shared_library("absl_dynamic_annotations") {
-  sources = [ "dynamic_annotations.cc" ]
-  include_dirs = [ "${ABSEIL_DIR}/" ]
-
-  cflags = ABSL_DEFAULT_COPTS
-  install_enable = false
-  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
-  part_name = "${OHOS_PROFILER_PART_NAME}"
-}
-
-ohos_shared_library("absl_malloc_internal") {
-  sources = [ "internal/low_level_alloc.cc" ]
-  include_dirs = [ "${ABSEIL_DIR}/" ]
-
-  cflags = ABSL_DEFAULT_COPTS
-
-  deps = [
-    ":absl_base",
-    ":absl_spinlock_wait",
-    "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
-  ]
-  install_enable = false
-  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
-  part_name = "${OHOS_PROFILER_PART_NAME}"
-}
-
-ohos_shared_library("absl_exponential_biased") {
-  sources = [ "internal/exponential_biased.cc" ]
-
-  include_dirs = [ "${ABSEIL_DIR}/" ]
-
-  cflags = ABSL_DEFAULT_COPTS
-  install_enable = false
+  if (target_cpu == "arm") {
+    install_enable = false
+  }
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
