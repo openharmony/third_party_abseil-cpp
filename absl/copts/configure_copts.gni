@@ -12,7 +12,6 @@
 # limitations under the License.
 
 ABSEIL_DIR = get_path_info("../..", "abspath")
-print("ABSEIL_DIR = ", ABSEIL_DIR)
 
 ABSL_DEFAULT_COPTS = [
   "-Wall",
