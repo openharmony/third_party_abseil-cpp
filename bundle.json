@@ -1,0 +1,40 @@
+{
+    "name": "@ohos/abseil_cpp",
+    "version": "",
+    "description": "Third-party open-source software abseil-cpp | 三方开源软件abseil-cpp",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache V2",
+    "repository": "https://gitee.com/openharmony/third_party_abseil-cpp",
+    "domain": "os",
+    "language": "",
+    "publishAs": "code-segment",
+    "private": false,
+    "scripts": {},
+    "tags": [
+        "third_party"
+    ],
+    "keywords": [
+        "third-party",
+        "abseil",
+        "cpp"
+    ],
+    "envs": [],
+    "dirs": [],
+    "segment": {
+        "destPath": "third_party/abseil-cpp"
+    },
+    "component": {
+        "name": "thirdparty_abseil-cpp",
+        "subsystem": "",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [],
+        "rom": "",
+        "ram": "",
+        "build": {
+            "sub_component": [],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
