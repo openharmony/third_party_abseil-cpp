@@ -1,0 +1,30 @@
+{
+    "name": "@ohos/abseil_cpp",
+    "description": "The repository contains the Abseil C++ library code. Abseil is an open-source collection of C++ code (compliant to C++11) designed to augment the C++ standard library.",
+    "version": "3.1",
+    "license": "Apache V2",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "third_party/abseil-cpp"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "thirdparty_abseil_cpp",
+        "subsystem": "",
+        "syscap": [],
+        "features": [],
+        "adapted_system_type": [],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": [],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [],
+            "inner_kits": [],
+            "test": []
+        }
+    }
+}
