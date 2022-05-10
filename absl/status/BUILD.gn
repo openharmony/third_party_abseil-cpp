@@ -1,0 +1,57 @@
+# Copyright (c) 2021 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//developtools/profiler/build/config.gni")
+import("../copts/configure_copts.gni")
+
+ohos_shared_library("absl_status") {
+  sources = [
+    "status.cc",
+    "status_payload_printer.cc",
+  ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  #deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
+  public_deps = [
+    "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
+    "${ABSEIL_DIR}/absl/strings:absl_cord",
+    "${ABSEIL_DIR}/absl/strings:absl_strings",
+  ]
+
+  install_enable = true
+
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_statusor") {
+  sources = [ "statusor.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  public_deps = [
+    ":absl_status",
+    "${ABSEIL_DIR}/absl/strings:absl_cord",
+  ]
+
+  install_enable = true
+
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}

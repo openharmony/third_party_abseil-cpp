@@ -117,6 +117,21 @@ ohos_shared_library("absl_strings_internal") {
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
+ohos_shared_library("absl_cord") {
+  sources = [ "cord.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  configs = [ ":cflags_config" ]
+
+  deps = [
+    ":absl_strings",
+    "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
 ohos_shared_library("absl_str_format_internal") {
   sources = [
     "internal/str_format/arg.cc",
