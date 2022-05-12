@@ -33,9 +33,7 @@ ohos_shared_library("absl_base") {
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
   ]
-  if (target_cpu == "arm") {
-    install_enable = false
-  }
+  install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
@@ -72,9 +70,7 @@ ohos_shared_library("absl_spinlock_wait") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  if (target_cpu == "arm") {
-    install_enable = false
-  }
+  install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
