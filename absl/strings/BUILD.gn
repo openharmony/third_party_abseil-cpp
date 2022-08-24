@@ -63,6 +63,10 @@ config("cflags_config") {
     "-Wstring-conversion",
     "-DNOMINMAX",
   ]
+
+  # Adapating DEBUG version, FIX ME
+  # https://gitee.com/openharmony/build/pulls/1206/files
+  defines = [ "NDEBUG" ]
 }
 
 ohos_shared_library("absl_strings") {
