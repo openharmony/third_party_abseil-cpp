@@ -59,4 +59,5 @@ ABSL_DEFAULT_COPTS = [
   "-Wno-sign-conversion",
   "-Wstring-conversion",
   "-DNOMINMAX",
+  "-Wno-reserved-identifier",
 ]
