@@ -62,6 +62,7 @@ config("cflags_config") {
     "-Wno-sign-conversion",
     "-Wstring-conversion",
     "-DNOMINMAX",
+    "-Wno-reserved-identifier",
   ]
 
   # Adapating DEBUG version, FIX ME
