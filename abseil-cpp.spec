@@ -2,16 +2,22 @@
 %undefine __cmake_in_source_build
 
 # Installed library version
-%global lib_version 2103.0.1
+%global lib_version 2206.0.0
 
 Name:           abseil-cpp
-Version:        20210324.2
-Release:        1
+Version:        20220623.1
+Release:        3
 Summary:        C++ Common Libraries
 
 License:        ASL 2.0
 URL:            https://abseil.io
 Source0:        https://github.com/abseil/abseil-cpp/archive/%{version}/%{name}-%{version}.tar.gz
+
+Patch0:         backport-Do-not-leak-maes-msse4.1-into-pkgconfig.patch
+Patch1:         abseil-cpp-20210324.2-sw.patch
+%ifarch loongarch64
+Patch100:	0001-add-loongarch-suopport-for-abseil-cpp.patch
+%endif
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -61,5 +67,20 @@ Development headers for %{name}
 %{_libdir}/pkgconfig/*.pc
 
 %changelog
+* Mon Nov 14 2022 Wenlong Zhang <zhangwenlong@loongson.cn> - 20220623.1-3
+- add loongarch support for abseil-cpp
+
+* Fri Nov 11 2022 wuzx<wuzx1226@qq.com> - 20220623.1-2
+- Type:feature
+- CVE:NA
+- SUG:NA
+- DESC:Add sw64 architecture
+
+* Wed Nov 02 2022 xinghe <xinghe2@h-partners.com> - 20220623.1-1
+- Type:enhancement
+- ID:NA
+- SUG:NA
+- DESC: update to 20220623.1
+
 * Wed Jun 23 2021 gaihuiying <gaihuiying1@huawei.com> - 20210324.2-1
 - package init

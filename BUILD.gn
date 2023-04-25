@@ -142,10 +142,11 @@ ohos_shared_library("absl_hash") {
     "${ABSEIL_DIR}/absl/hash/internal/city.h",
     "${ABSEIL_DIR}/absl/hash/internal/city.cc",
     "${ABSEIL_DIR}/absl/hash/internal/spy_hash_state.h",
-    "${ABSEIL_DIR}/absl/hash/internal/wyhash.h",
-    "${ABSEIL_DIR}/absl/hash/internal/wyhash.cc",
+    "${ABSEIL_DIR}/absl/hash/internal/low_level_hash.h",
+    "${ABSEIL_DIR}/absl/hash/internal/low_level_hash.cc",
     "${ABSEIL_DIR}/absl/hash/internal/hash.cc",
-    "${ABSEIL_DIR}/absl/hash/internal/hash.h"
+    "${ABSEIL_DIR}/absl/hash/internal/hash.h",
+    "${ABSEIL_DIR}/absl/hash/internal/print_hash_of.cc",
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
@@ -177,6 +178,7 @@ ohos_shared_library("absl_status") {
   sources = [
     "${ABSEIL_DIR}/absl/status/status.cc",
     "${ABSEIL_DIR}/absl/status/status_payload_printer.cc",
+    "${ABSEIL_DIR}/absl/base/internal/strerror.cc",
   ]
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
@@ -197,7 +199,9 @@ ohos_shared_library("absl_status") {
 }
 
 ohos_shared_library("absl_statusor") {
-  sources = [ "${ABSEIL_DIR}/absl/status/statusor.cc" ]
+  sources = [ 
+    "${ABSEIL_DIR}/absl/status/statusor.cc",
+    ]
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
@@ -206,6 +210,7 @@ ohos_shared_library("absl_statusor") {
   public_deps = [
     ":absl_status",
     ":absl_cord",
+    ":absl_spinlock_wait",
   ]
 
   install_enable = true
@@ -262,6 +267,7 @@ config("cflags_config") {
     "-Wstring-conversion",
     "-DNOMINMAX",
     "-Wno-reserved-identifier",
+    "-Wno-unused-template",
   ]
 
   # Adapating DEBUG version, FIX ME
@@ -283,6 +289,7 @@ ohos_shared_library("absl_strings") {
     "${ABSEIL_DIR}/absl/strings/internal/stl_type_traits.h",
     "${ABSEIL_DIR}/absl/strings/internal/str_join_internal.h",
     "${ABSEIL_DIR}/absl/strings/internal/str_split_internal.h",
+    "${ABSEIL_DIR}/absl/strings/internal/escaping.cc",
     "${ABSEIL_DIR}/absl/strings/match.cc",
     "${ABSEIL_DIR}/absl/strings/numbers.cc",
     "${ABSEIL_DIR}/absl/strings/str_cat.cc",
@@ -290,6 +297,7 @@ ohos_shared_library("absl_strings") {
     "${ABSEIL_DIR}/absl/strings/str_split.cc",
     "${ABSEIL_DIR}/absl/strings/string_view.cc",
     "${ABSEIL_DIR}/absl/strings/substitute.cc",
+
   ]
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
@@ -306,9 +314,6 @@ ohos_shared_library("absl_strings") {
 
 ohos_shared_library("absl_strings_internal") {
   sources = [
-    "${ABSEIL_DIR}/absl/strings/internal/cord_internal.cc",
-    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_ring.cc",
-    "${ABSEIL_DIR}/absl/strings/internal/escaping.cc",
     "${ABSEIL_DIR}/absl/strings/internal/ostringstream.cc",
     "${ABSEIL_DIR}/absl/strings/internal/utf8.cc",
   ]
@@ -326,7 +331,22 @@ ohos_shared_library("absl_strings_internal") {
 }
 
 ohos_shared_library("absl_cord") {
-  sources = [ "${ABSEIL_DIR}/absl/strings/cord.cc" ]
+  sources = [ 
+    "${ABSEIL_DIR}/absl/strings/cord.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cordz_functions.cc",
+    "${ABSEIL_DIR}/absl/profiling/internal/exponential_biased.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cordz_info.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_btree.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_internal.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_crc.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_btree_reader.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cordz_handle.cc",
+    "${ABSEIL_DIR}/absl/synchronization/mutex.cc",
+    "${ABSEIL_DIR}/absl/debugging/stacktrace.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_consume.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_btree_navigator.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_ring.cc"
+    ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   configs = [ ":cflags_config" ]
@@ -334,6 +354,10 @@ ohos_shared_library("absl_cord") {
   deps = [
     ":absl_strings",
     ":absl_raw_logging_internal",
+    ":absl_base",
+    ":absl_time",
+    ":absl_sync",
+    ":absl_throw_delegate",
   ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
@@ -401,6 +425,21 @@ ohos_shared_library("absl_civil_time") {
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
 
+ohos_shared_library("absl_container") {
+  sources = [ 
+    "${ABSEIL_DIR}/absl/container/internal/raw_hash_set.cc", 
+    ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [
+    ":absl_base",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+
 ohos_shared_library("absl_time_zone") {
   sources = [
     "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_fixed.cc",
@@ -421,7 +460,6 @@ ohos_shared_library("absl_time_zone") {
     "${ABSEIL_DIR}/absl/time/internal/cctz/src/zone_info_source.cc",
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
-
   deps = [ ":absl_civil_time" ]
   install_enable = true
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
@@ -438,10 +476,8 @@ ohos_shared_library("absl_time") {
     "${ABSEIL_DIR}/absl/time/internal/get_current_time_posix.inc",
     "${ABSEIL_DIR}/absl/time/time.cc",
   ]
-   include_dirs = [ "${ABSEIL_DIR}/" ]
-
+  include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-
   public_deps = [
     ":absl_base",
     ":absl_raw_logging_internal",
@@ -457,7 +493,6 @@ ohos_shared_library("absl_time") {
 
 ohos_shared_library("absl_bad_optional_access") {
   sources = [ "${ABSEIL_DIR}/absl/types/bad_optional_access.cc" ]
-
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [ ":absl_raw_logging_internal" ]

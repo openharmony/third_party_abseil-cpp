@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ABSEIL_DIR = get_path_info("./abseil-cpp-20210324.2/", "abspath")
+ABSEIL_DIR = get_path_info("./abseil-cpp-20220623.1/", "abspath")
 
 ABSL_DEFAULT_COPTS = [
   "-Wall",
@@ -60,5 +60,5 @@ ABSL_DEFAULT_COPTS = [
   "-Wstring-conversion",
   "-DNOMINMAX",
   "-Wno-reserved-identifier",
-  "-Wno-shadow-field-in-constructor"
+  "-Wno-shadow-field-in-constructor",
 ]
