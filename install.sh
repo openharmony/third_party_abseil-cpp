@@ -13,5 +13,4 @@ if [ -d "abseil-cpp-20220623.1" ];then
 fi
 tar zxvf abseil-cpp-20220623.1.tar.gz
 cd $1/abseil-cpp-20220623.1
-#patch -p1 < $1/absl_hash_internal.patch --fuzz=0 --no-backup-if-mismatch
 exit 0
