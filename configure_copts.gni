@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ABSEIL_DIR = get_path_info("./abseil-cpp-20220623.1/", "abspath")
+ABSEIL_DIR = get_path_info("./abseil-cpp/", "abspath")
 
 ABSL_DEFAULT_COPTS = [
   "-Wall",
