@@ -103,6 +103,8 @@ ohos_shared_library("absl_stacktrace") {
     "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_unimplemented-inl.inc",
     "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_win32-inl.inc",
     "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_x86-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/vdso_support.cc",
+    "${ABSEIL_DIR}/absl/debugging/internal/elf_mem_image.cc",
     "${ABSEIL_DIR}/absl/debugging/stacktrace.cc",
     "${ABSEIL_DIR}/absl/debugging/stacktrace.h",
   ]

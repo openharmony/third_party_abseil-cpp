@@ -61,4 +61,5 @@ ABSL_DEFAULT_COPTS = [
   "-DNOMINMAX",
   "-Wno-reserved-identifier",
   "-Wno-shadow-field-in-constructor",
+  "-Wno-unreachable-code-break",
 ]
