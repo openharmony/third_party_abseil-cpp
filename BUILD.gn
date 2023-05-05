@@ -1,0 +1,499 @@
+# Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/ohos.gni")
+import("//developtools/profiler/build/config.gni")
+import("./configure_copts.gni")
+
+libabseil_path = rebase_path("//third_party/abseil-cpp")
+exec_script("install.sh", [ "$libabseil_path" ])
+
+ohos_shared_library("absl_base") {
+  sources = [
+    "${ABSEIL_DIR}/absl/base/internal/cycleclock.cc",
+    "${ABSEIL_DIR}/absl/base/internal/low_level_alloc.cc",
+    "${ABSEIL_DIR}/absl/base/internal/spinlock.cc",
+    "${ABSEIL_DIR}/absl/base/internal/sysinfo.cc",
+    "${ABSEIL_DIR}/absl/base/internal/thread_identity.cc",
+    "${ABSEIL_DIR}/absl/base/internal/unscaledcycleclock.cc",
+  ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  public_deps = [
+    ":absl_log_severity",
+    ":absl_raw_logging_internal",
+    ":absl_spinlock_wait",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_raw_logging_internal") {
+  sources = [ "${ABSEIL_DIR}/absl/base/internal/raw_logging.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  deps = [ ":absl_log_severity" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_log_severity") {
+  sources = [ "${ABSEIL_DIR}/absl/base/log_severity.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_spinlock_wait") {
+  sources = [
+    "${ABSEIL_DIR}/absl/base/internal/spinlock_akaros.inc",
+    "${ABSEIL_DIR}/absl/base/internal/spinlock_linux.inc",
+    "${ABSEIL_DIR}/absl/base/internal/spinlock_posix.inc",
+    "${ABSEIL_DIR}/absl/base/internal/spinlock_wait.cc",
+    "${ABSEIL_DIR}/absl/base/internal/spinlock_win32.inc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_throw_delegate") {
+  sources = [ "${ABSEIL_DIR}/absl/base/internal/throw_delegate.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+  deps = [ ":absl_raw_logging_internal" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_stacktrace") {
+  sources = [
+    "${ABSEIL_DIR}/absl/debugging/internal/address_is_readable.cc",
+    "${ABSEIL_DIR}/absl/debugging/internal/address_is_readable.h",
+    "${ABSEIL_DIR}/absl/debugging/internal/elf_mem_image.cc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_aarch64-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_arm-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_config.h",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_generic-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_powerpc-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_unimplemented-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_win32-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/stacktrace_x86-inl.inc",
+    "${ABSEIL_DIR}/absl/debugging/internal/vdso_support.cc",
+    "${ABSEIL_DIR}/absl/debugging/stacktrace.cc",
+    "${ABSEIL_DIR}/absl/debugging/stacktrace.h",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [ ":absl_base" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_symbolize") {
+  sources = [
+    "${ABSEIL_DIR}/absl/debugging/internal/symbolize.h",
+    "${ABSEIL_DIR}/absl/debugging/symbolize.cc",
+    "${ABSEIL_DIR}/absl/debugging/symbolize.h",
+    "${ABSEIL_DIR}/absl/debugging/symbolize_darwin.inc",
+    "${ABSEIL_DIR}/absl/debugging/symbolize_elf.inc",
+    "${ABSEIL_DIR}/absl/debugging/symbolize_unimplemented.inc",
+    "${ABSEIL_DIR}/absl/debugging/symbolize_win32.inc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [ ":absl_base" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_hash") {
+  sources = [
+    "${ABSEIL_DIR}/absl/hash/internal/city.cc",
+    "${ABSEIL_DIR}/absl/hash/internal/city.h",
+    "${ABSEIL_DIR}/absl/hash/internal/hash.cc",
+    "${ABSEIL_DIR}/absl/hash/internal/hash.h",
+    "${ABSEIL_DIR}/absl/hash/internal/low_level_hash.cc",
+    "${ABSEIL_DIR}/absl/hash/internal/low_level_hash.h",
+    "${ABSEIL_DIR}/absl/hash/internal/print_hash_of.cc",
+    "${ABSEIL_DIR}/absl/hash/internal/spy_hash_state.h",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [
+    ":absl_base",
+    ":absl_stacktrace",
+    ":absl_symbolize",
+    ":absl_time",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_int128") {
+  sources = [
+    "${ABSEIL_DIR}/absl/numeric/int128.cc",
+    "${ABSEIL_DIR}/absl/numeric/int128_have_intrinsic.inc",
+    "${ABSEIL_DIR}/absl/numeric/int128_no_intrinsic.inc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_status") {
+  sources = [
+    "${ABSEIL_DIR}/absl/base/internal/strerror.cc",
+    "${ABSEIL_DIR}/absl/status/status.cc",
+    "${ABSEIL_DIR}/absl/status/status_payload_printer.cc",
+  ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  #deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
+  public_deps = [
+    ":absl_cord",
+    ":absl_raw_logging_internal",
+    ":absl_strings",
+  ]
+
+  install_enable = true
+
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_statusor") {
+  sources = [ "${ABSEIL_DIR}/absl/status/statusor.cc" ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  cflags = ABSL_DEFAULT_COPTS
+
+  public_deps = [
+    ":absl_cord",
+    ":absl_spinlock_wait",
+    ":absl_status",
+  ]
+
+  install_enable = true
+
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+config("cflags_config") {
+  cflags = [
+    "-Wall",
+    "-Wextra",
+    "-Weverything",
+    "-Wno-c++98-compat-pedantic",
+    "-Wno-conversion",
+    "-Wno-covered-switch-default",
+    "-Wno-deprecated",
+    "-Wno-disabled-macro-expansion",
+    "-Wno-double-promotion",
+    "-Wno-comma",
+    "-Wno-extra-semi",
+    "-Wno-extra-semi-stmt",
+    "-Wno-packed",
+    "-Wno-padded",
+    "-Wno-sign-compare",
+    "-Wno-float-conversion",
+    "-Wno-float-equal",
+    "-Wno-format-nonliteral",
+    "-Wno-gcc-compat",
+    "-Wno-global-constructors",
+    "-Wno-exit-time-destructors",
+    "-Wno-non-modular-include-in-module",
+    "-Wno-old-style-cast",
+    "-Wno-range-loop-analysis",
+    "-Wno-reserved-id-macro",
+    "-Wno-shorten-64-to-32",
+    "-Wno-switch-enum",
+    "-Wno-thread-safety-negative",
+    "-Wno-unknown-warning-option",
+    "-Wno-unreachable-code",
+    "-Wno-unused-macros",
+    "-Wno-weak-vtables",
+    "-Wno-zero-as-null-pointer-constant",
+    "-Wbitfield-enum-conversion",
+    "-Wbool-conversion",
+    "-Wconstant-conversion",
+    "-Wenum-conversion",
+    "-Wint-conversion",
+    "-Wliteral-conversion",
+    "-Wnon-literal-null-conversion",
+    "-Wnull-conversion",
+    "-Wobjc-literal-conversion",
+    "-Wno-sign-conversion",
+    "-Wstring-conversion",
+    "-DNOMINMAX",
+    "-Wno-reserved-identifier",
+    "-Wno-unused-template",
+  ]
+
+  # Adapating DEBUG version, FIX ME
+  # https://gitee.com/openharmony/build/pulls/1206/files
+  defines = [ "NDEBUG" ]
+}
+
+ohos_shared_library("absl_strings") {
+  sources = [
+    "${ABSEIL_DIR}/absl/strings/ascii.cc",
+    "${ABSEIL_DIR}/absl/strings/charconv.cc",
+    "${ABSEIL_DIR}/absl/strings/escaping.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/charconv_bigint.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/charconv_bigint.h",
+    "${ABSEIL_DIR}/absl/strings/internal/charconv_parse.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/charconv_parse.h",
+    "${ABSEIL_DIR}/absl/strings/internal/escaping.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/memutil.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/memutil.h",
+    "${ABSEIL_DIR}/absl/strings/internal/stl_type_traits.h",
+    "${ABSEIL_DIR}/absl/strings/internal/str_join_internal.h",
+    "${ABSEIL_DIR}/absl/strings/internal/str_split_internal.h",
+    "${ABSEIL_DIR}/absl/strings/match.cc",
+    "${ABSEIL_DIR}/absl/strings/numbers.cc",
+    "${ABSEIL_DIR}/absl/strings/str_cat.cc",
+    "${ABSEIL_DIR}/absl/strings/str_replace.cc",
+    "${ABSEIL_DIR}/absl/strings/str_split.cc",
+    "${ABSEIL_DIR}/absl/strings/string_view.cc",
+    "${ABSEIL_DIR}/absl/strings/substitute.cc",
+  ]
+
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  configs = [ ":cflags_config" ]
+  public_deps = [
+    ":absl_int128",
+    ":absl_raw_logging_internal",
+    ":absl_strings_internal",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_strings_internal") {
+  sources = [
+    "${ABSEIL_DIR}/absl/strings/internal/ostringstream.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/utf8.cc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  configs = [ ":cflags_config" ]
+
+  deps = [
+    ":absl_raw_logging_internal",
+    ":absl_throw_delegate",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_cord") {
+  sources = [
+    "${ABSEIL_DIR}/absl/debugging/stacktrace.cc",
+    "${ABSEIL_DIR}/absl/profiling/internal/exponential_biased.cc",
+    "${ABSEIL_DIR}/absl/strings/cord.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_internal.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_btree.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_btree_navigator.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_btree_reader.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_consume.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_crc.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cord_rep_ring.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cordz_functions.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cordz_handle.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/cordz_info.cc",
+    "${ABSEIL_DIR}/absl/synchronization/mutex.cc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  configs = [ ":cflags_config" ]
+
+  deps = [
+    ":absl_base",
+    ":absl_raw_logging_internal",
+    ":absl_strings",
+    ":absl_sync",
+    ":absl_throw_delegate",
+    ":absl_time",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_str_format_internal") {
+  sources = [
+    "${ABSEIL_DIR}/absl/strings/internal/str_format/arg.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/str_format/bind.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/str_format/extension.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/str_format/float_conversion.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/str_format/output.cc",
+    "${ABSEIL_DIR}/absl/strings/internal/str_format/parser.cc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+
+  configs = [ ":cflags_config" ]
+
+  deps = [
+    ":absl_int128",
+    ":absl_strings",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_sync") {
+  sources = [
+    "${ABSEIL_DIR}/absl/synchronization/barrier.cc",
+    "${ABSEIL_DIR}/absl/synchronization/barrier.h",
+    "${ABSEIL_DIR}/absl/synchronization/blocking_counter.cc",
+    "${ABSEIL_DIR}/absl/synchronization/blocking_counter.h",
+    "${ABSEIL_DIR}/absl/synchronization/internal/create_thread_identity.cc",
+    "${ABSEIL_DIR}/absl/synchronization/internal/create_thread_identity.h",
+    "${ABSEIL_DIR}/absl/synchronization/internal/futex.h",
+    "${ABSEIL_DIR}/absl/synchronization/internal/per_thread_sem.cc",
+    "${ABSEIL_DIR}/absl/synchronization/internal/per_thread_sem.h",
+    "${ABSEIL_DIR}/absl/synchronization/internal/waiter.cc",
+    "${ABSEIL_DIR}/absl/synchronization/internal/waiter.h",
+    "${ABSEIL_DIR}/absl/synchronization/mutex.cc",
+    "${ABSEIL_DIR}/absl/synchronization/mutex.h",
+    "${ABSEIL_DIR}/absl/synchronization/notification.cc",
+    "${ABSEIL_DIR}/absl/synchronization/notification.h",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [
+    ":absl_base",
+    ":absl_stacktrace",
+    ":absl_symbolize",
+    ":absl_time",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_civil_time") {
+  sources = [ "${ABSEIL_DIR}/absl/time/internal/cctz/src/civil_time_detail.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_container") {
+  sources = [ "${ABSEIL_DIR}/absl/container/internal/raw_hash_set.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [ ":absl_base" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_time_zone") {
+  sources = [
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_fixed.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_fixed.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_format.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_if.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_if.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_impl.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_impl.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_info.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_info.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_libc.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_libc.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_lookup.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_posix.cc",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_posix.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/tzfile.h",
+    "${ABSEIL_DIR}/absl/time/internal/cctz/src/zone_info_source.cc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  deps = [ ":absl_civil_time" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_time") {
+  sources = [
+    "${ABSEIL_DIR}/absl/time/civil_time.cc",
+    "${ABSEIL_DIR}/absl/time/clock.cc",
+    "${ABSEIL_DIR}/absl/time/duration.cc",
+    "${ABSEIL_DIR}/absl/time/format.cc",
+    "${ABSEIL_DIR}/absl/time/internal/get_current_time_chrono.inc",
+    "${ABSEIL_DIR}/absl/time/internal/get_current_time_posix.inc",
+    "${ABSEIL_DIR}/absl/time/time.cc",
+  ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  public_deps = [
+    ":absl_base",
+    ":absl_civil_time",
+    ":absl_int128",
+    ":absl_raw_logging_internal",
+    ":absl_strings",
+    ":absl_time_zone",
+  ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+  part_name = "${OHOS_PROFILER_PART_NAME}"
+}
+
+ohos_shared_library("absl_bad_optional_access") {
+  sources = [ "${ABSEIL_DIR}/absl/types/bad_optional_access.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  deps = [ ":absl_raw_logging_internal" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
+
+ohos_shared_library("absl_bad_variant_access") {
+  sources = [ "${ABSEIL_DIR}/absl/types/bad_variant_access.cc" ]
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags = ABSL_DEFAULT_COPTS
+  deps = [ ":absl_raw_logging_internal" ]
+  install_enable = true
+  subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
+}
