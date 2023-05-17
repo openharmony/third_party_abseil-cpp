@@ -60,6 +60,7 @@ ohos_shared_library("absl_log_severity") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
+  innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
@@ -87,6 +88,7 @@ ohos_shared_library("absl_throw_delegate") {
   cflags = ABSL_DEFAULT_COPTS
   deps = [ ":absl_raw_logging_internal" ]
   install_enable = true
+  innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
@@ -167,6 +169,7 @@ ohos_shared_library("absl_int128") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
+  innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
@@ -302,6 +305,7 @@ ohos_shared_library("absl_strings") {
     ":absl_strings_internal",
   ]
   install_enable = true
+  innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
@@ -320,6 +324,7 @@ ohos_shared_library("absl_strings_internal") {
     ":absl_throw_delegate",
   ]
   install_enable = true
+  innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${OHOS_PROFILER_SUBSYS_NAME}"
   part_name = "${OHOS_PROFILER_PART_NAME}"
 }
