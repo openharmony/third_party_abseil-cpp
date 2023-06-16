@@ -50,6 +50,7 @@ ohos_shared_library("absl_raw_logging_internal") {
 
   deps = [ ":absl_log_severity" ]
   install_enable = true
+  innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
