@@ -13,7 +13,7 @@
 
 ABSEIL_DIR = get_path_info("./abseil-cpp/", "abspath")
 THIRDPARTY_ABSEIL_SUBSYS_NAME = "thirdparty"
-THIRDPARTY_ABSEIL_PART_NAME = "abseil_cpp"
+THIRDPARTY_ABSEIL_PART_NAME = "abseil-cpp"
 ABSL_DEFAULT_COPTS = [
   "-Wall",
   "-Wextra",
