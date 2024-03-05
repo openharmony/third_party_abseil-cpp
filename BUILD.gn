@@ -394,6 +394,8 @@ ohos_shared_library("absl_sync") {
     "${ABSEIL_DIR}/absl/synchronization/internal/create_thread_identity.cc",
     "${ABSEIL_DIR}/absl/synchronization/internal/create_thread_identity.h",
     "${ABSEIL_DIR}/absl/synchronization/internal/futex.h",
+    "${ABSEIL_DIR}/absl/synchronization/internal/graphcycles.cc",
+    "${ABSEIL_DIR}/absl/synchronization/internal/graphcycles.h",
     "${ABSEIL_DIR}/absl/synchronization/internal/per_thread_sem.cc",
     "${ABSEIL_DIR}/absl/synchronization/internal/per_thread_sem.h",
     "${ABSEIL_DIR}/absl/synchronization/internal/waiter.cc",
