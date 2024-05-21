@@ -23,7 +23,66 @@
         },
         "build": {
             "sub_component": [],
-            "inner_kits": [],
+            "inner_kits": [
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_status"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_statusor"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_str_format_internal"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_strings"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_sync"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_throw_delegate"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_time"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_container"
+                }
+
+
+            ],
             "test": []
         }
     }
