@@ -79,6 +79,27 @@
                         "header_files": []
                     },
                     "name": "//third_party/abseil-cpp:absl_container"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_spinlock_wait"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_cord"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_time_zone" 
                 }
 
 
