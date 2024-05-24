@@ -112,7 +112,10 @@ ohos_shared_library("absl_stacktrace") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  deps = [ ":absl_base", ":absl_raw_logging_internal" ]
+  deps = [
+    ":absl_base",
+    ":absl_raw_logging_internal",
+  ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -207,9 +210,9 @@ ohos_shared_library("absl_statusor") {
 
   deps = [
     ":absl_cord",
+    ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
     ":absl_status",
-    ":absl_raw_logging_internal",
     ":absl_strings",
   ]
 
@@ -355,12 +358,12 @@ ohos_shared_library("absl_cord") {
   deps = [
     ":absl_base",
     ":absl_raw_logging_internal",
+    ":absl_spinlock_wait",
     ":absl_strings",
+    ":absl_symbolize",
     ":absl_sync",
     ":absl_throw_delegate",
     ":absl_time",
-    ":absl_spinlock_wait",
-    ":absl_symbolize",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -413,11 +416,11 @@ ohos_shared_library("absl_sync") {
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_base",
+    ":absl_raw_logging_internal",
+    ":absl_spinlock_wait",
     ":absl_stacktrace",
     ":absl_symbolize",
     ":absl_time",
-    ":absl_raw_logging_internal",
-    ":absl_spinlock_wait",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
