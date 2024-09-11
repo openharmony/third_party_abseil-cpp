@@ -42,6 +42,7 @@ ohos_shared_library("absl_base") {
 }
 
 ohos_shared_library("absl_raw_logging_internal") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/base/internal/raw_logging.cc" ]
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
@@ -279,6 +280,7 @@ config("cflags_config") {
 }
 
 ohos_shared_library("absl_strings") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/strings/ascii.cc",
     "${ABSEIL_DIR}/absl/strings/charconv.cc",
@@ -316,6 +318,7 @@ ohos_shared_library("absl_strings") {
 }
 
 ohos_shared_library("absl_strings_internal") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/strings/internal/ostringstream.cc",
     "${ABSEIL_DIR}/absl/strings/internal/utf8.cc",
