@@ -17,6 +17,10 @@ import("./configure_copts.gni")
 libabseil_path = rebase_path("//third_party/abseil-cpp")
 exec_script("install.sh", [ "$libabseil_path" ])
 
+config("absl_public_config") {
+  include_dirs = [ "${ABSEIL_DIR}/" ]
+}
+
 ohos_shared_library("absl_base") {
   sources = [
     "${ABSEIL_DIR}/absl/base/internal/cycleclock.cc",
@@ -30,7 +34,7 @@ ohos_shared_library("absl_base") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
-
+  public_configs = [ ":absl_public_config" ]
   deps = [
     ":absl_log_severity",
     ":absl_raw_logging_internal",
@@ -48,7 +52,7 @@ ohos_shared_library("absl_raw_logging_internal") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
-
+  public_configs = [ ":absl_public_config" ]
   deps = [ ":absl_log_severity" ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -61,6 +65,7 @@ ohos_shared_library("absl_log_severity") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
+  public_configs = [ ":absl_public_config" ]
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -74,6 +79,7 @@ ohos_shared_library("absl_spinlock_wait") {
     "${ABSEIL_DIR}/absl/base/internal/spinlock_wait.cc",
     "${ABSEIL_DIR}/absl/base/internal/spinlock_win32.inc",
   ]
+  public_configs = [ ":absl_public_config" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
@@ -88,6 +94,7 @@ ohos_shared_library("absl_throw_delegate") {
 
   cflags = ABSL_DEFAULT_COPTS
   deps = [ ":absl_raw_logging_internal" ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -117,6 +124,7 @@ ohos_shared_library("absl_stacktrace") {
     ":absl_base",
     ":absl_raw_logging_internal",
   ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -135,6 +143,7 @@ ohos_shared_library("absl_symbolize") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [ ":absl_base" ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -159,6 +168,7 @@ ohos_shared_library("absl_hash") {
     ":absl_symbolize",
     ":absl_time",
   ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -173,6 +183,7 @@ ohos_shared_library("absl_int128") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
+  public_configs = [ ":absl_public_config" ]
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -188,6 +199,7 @@ ohos_shared_library("absl_status") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 
   cflags = ABSL_DEFAULT_COPTS
+  public_configs = [ ":absl_public_config" ]
 
   #deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
   deps = [
@@ -216,7 +228,7 @@ ohos_shared_library("absl_statusor") {
     ":absl_status",
     ":absl_strings",
   ]
-
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
 
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -311,6 +323,7 @@ ohos_shared_library("absl_strings") {
     ":absl_raw_logging_internal",
     ":absl_strings_internal",
   ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -369,6 +382,7 @@ ohos_shared_library("absl_cord") {
     ":absl_throw_delegate",
     ":absl_time",
   ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -426,6 +440,7 @@ ohos_shared_library("absl_sync") {
     ":absl_symbolize",
     ":absl_time",
   ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -470,6 +485,7 @@ ohos_shared_library("absl_time_zone") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   deps = [ ":absl_civil_time" ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -495,6 +511,7 @@ ohos_shared_library("absl_time") {
     ":absl_strings",
     ":absl_time_zone",
   ]
+  public_configs = [ ":absl_public_config" ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
