@@ -100,6 +100,13 @@
                         "header_files": []
                     },
                     "name": "//third_party/abseil-cpp:absl_time_zone"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_base"
                 }
             ],
             "test": []
