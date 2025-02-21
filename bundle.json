@@ -107,6 +107,48 @@
                         "header_files": []
                     },
                     "name": "//third_party/abseil-cpp:absl_base"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_log"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_hash"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_int128"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_flags"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_random"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_base_static"
                 }
             ],
             "test": []
