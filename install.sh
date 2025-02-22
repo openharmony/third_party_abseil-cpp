@@ -9,7 +9,6 @@
 set -e
 cd $1
 {
-flock -x 100
 if [ -d "abseil-cpp" ];then
     rm -rf abseil-cpp
 fi
