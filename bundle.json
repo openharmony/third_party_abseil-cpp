@@ -149,6 +149,13 @@
                         "header_files": []
                     },
                     "name": "//third_party/abseil-cpp:absl_base_static"
+                },
+                {
+                    "header": {
+                        "header_base": "//third_party/abseil-cpp/abseil-cpp",
+                        "header_files": []
+                    },
+                    "name": "//third_party/abseil-cpp:absl_raw_logging_internal"
                 }
             ],
             "test": []
