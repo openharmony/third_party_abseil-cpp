@@ -16,7 +16,7 @@ import("./configure_copts.gni")
 
 libabseil_path = rebase_path("//third_party/abseil-cpp")
 
-if (is_mac || is_ios) {
+if (host_os == "mac") {
   exec_script("install_mac.sh", [ "$libabseil_path" ])
 } else {
   exec_script("install.sh", [ "$libabseil_path" ])
