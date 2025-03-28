@@ -52,7 +52,6 @@
             <policy name="projectPolicy" desc="">
                 <policyitem type="compatibility"  path="BUILD.gn" desc="They are used in dynamic link mode."/>
                 <policyitem type="compatibility"  path="install.sh" desc="They are used in dynamic link mode."/>
-                <policyitem type="compatibility"  path="install_mac.sh" desc="They are used in dynamic link mode."/>
                 <policyitem type="compatibility"  path="abseil-cpp.spec" desc="They are used in dynamic link mode."/>
             </policy>
         </policylist>
