@@ -63,13 +63,4 @@ ABSL_DEFAULT_COPTS = [
   "-Wno-reserved-identifier",
   "-Wno-shadow-field-in-constructor",
   "-Wno-unreachable-code-break",
-  "-Wno-missing-noreturn",
-  "-Wno-unused-template",
-  "-Wno-tautological-type-limit-compare",
-  "-Wno-unreachable-code-return",
-  "-Wno-atomic-implicit-seq-cst",
-  "-Wno-error=unknown-pragmas",
-  "-Wno-c++17-attribute-extensions",
-  "-Wno-cast-function-type",
-  "-Wno-undef",
 ]
