@@ -17,7 +17,7 @@ import("./configure_copts.gni")
 libabseil_path = rebase_path("//third_party/abseil-cpp")
 
 if (is_mac || is_ios) {
-  exec_script("install_mac.sh", [ "$libabseil_path" ])
+  exec_script("install_no_lock.sh", [ "$libabseil_path" ])
 } else {
   exec_script("install.sh", [ "$libabseil_path" ])
 }
@@ -489,7 +489,6 @@ ohos_static_library("absl_base_static") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  defines = [ "STRIP_LOG=1" ]
   public_configs = [ ":absl_public_config" ]
   deps = []
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -521,7 +520,6 @@ ohos_shared_library("absl_log") {
     "${ABSEIL_DIR}/absl/log/internal/globals.cc",
     "${ABSEIL_DIR}/absl/log/internal/log_format.cc",
     "${ABSEIL_DIR}/absl/log/internal/log_message.cc",
-    "${ABSEIL_DIR}/absl/log/internal/log_message.h",
     "${ABSEIL_DIR}/absl/log/internal/log_sink_set.cc",
     "${ABSEIL_DIR}/absl/log/internal/nullguard.cc",
     "${ABSEIL_DIR}/absl/log/internal/nullguard.h",
@@ -827,7 +825,6 @@ ohos_shared_library("absl_strings") {
     ":absl_int128",
     ":absl_raw_logging_internal",
     ":absl_strings_internal",
-    ":absl_throw_delegate",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -899,7 +896,6 @@ ohos_shared_library("absl_cord") {
     ":absl_sync",
     ":absl_throw_delegate",
     ":absl_time",
-    ":absl_str_format_internal",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -923,7 +919,6 @@ ohos_shared_library("absl_str_format_internal") {
   deps = [
     ":absl_int128",
     ":absl_strings",
-    ":absl_throw_delegate",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -953,7 +948,6 @@ ohos_shared_library("absl_sync") {
     "${ABSEIL_DIR}/absl/synchronization/mutex.h",
     "${ABSEIL_DIR}/absl/synchronization/notification.cc",
     "${ABSEIL_DIR}/absl/synchronization/notification.h",
-    "${ABSEIL_DIR}/absl/synchronization/internal/stdcpp_waiter.cc",
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
