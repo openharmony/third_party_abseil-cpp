@@ -1,0 +1,45 @@
+diff -uprN a/absl/debugging/symbolize.cc b/absl/debugging/symbolize.cc
+--- a/absl/debugging/symbolize.cc	2023-09-18 22:40:01.000000000 +0800
++++ b/absl/debugging/symbolize.cc	2025-02-17 19:17:40.838757700 +0800
+@@ -19,7 +19,7 @@
+ #if !(WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)) || \
+     WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ // UWP doesn't have access to win32 APIs.
+-#define ABSL_INTERNAL_HAVE_SYMBOLIZE_WIN32
++//#define ABSL_INTERNAL_HAVE_SYMBOLIZE_WIN32
+ #endif
+ #endif
+ 
+diff -uprN a/absl/synchronization/internal/pthread_waiter.h b/absl/synchronization/internal/pthread_waiter.h
+--- a/absl/synchronization/internal/pthread_waiter.h	2023-09-18 22:40:01.000000000 +0800
++++ b/absl/synchronization/internal/pthread_waiter.h	2025-02-17 16:46:03.212234400 +0800
+@@ -16,7 +16,7 @@
+ #ifndef ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
+ #define ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
+ 
+-#ifndef _WIN32
++#if !defined(_WIN32) && !defined(__MINGW32__)
+ #include <pthread.h>
+ 
+ #include "absl/base/config.h"
+@@ -55,6 +55,6 @@ class PthreadWaiter : public WaiterCrtp<
+ ABSL_NAMESPACE_END
+ }  // namespace absl
+ 
+-#endif  // ndef _WIN32
++#endif  // !defined(_WIN32) && !defined(__MINGW32__)
+ 
+ #endif  // ABSL_SYNCHRONIZATION_INTERNAL_PTHREAD_WAITER_H_
+diff -uprN a/absl/synchronization/internal/win32_waiter.h b/absl/synchronization/internal/win32_waiter.h
+--- a/absl/synchronization/internal/win32_waiter.h	2023-09-18 22:40:01.000000000 +0800
++++ b/absl/synchronization/internal/win32_waiter.h	2025-02-17 16:40:32.342234400 +0800
+@@ -20,7 +20,8 @@
+ #include <sdkddkver.h>
+ #endif
+ 
+-#if defined(_WIN32) && _WIN32_WINNT >= _WIN32_WINNT_VISTA
++#if defined(_WIN32) && !defined(__MINGW32__) && \
++    _WIN32_WINNT >= _WIN32_WINNT_VISTA
+ 
+ #include "absl/base/config.h"
+ #include "absl/synchronization/internal/kernel_timeout.h"
