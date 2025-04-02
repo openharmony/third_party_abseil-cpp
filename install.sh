@@ -14,4 +14,5 @@ fi
 tar zxvf abseil-cpp-20220623.1.tar.gz
 mv abseil-cpp-20220623.1 abseil-cpp
 cd $1/abseil-cpp
+patch -p1 < $1/backport-CVE-2025-0838.patch
 exit 0
