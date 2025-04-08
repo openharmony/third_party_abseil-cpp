@@ -18,5 +18,6 @@ patch -p1 < $1/abseil-cpp-20210324.2-sw.patch
 patch -p1 < $1/0001-add-loongarch-suopport-for-abseil-cpp.patch
 patch -p1 < $1/0002-PR-1644-unscaledcycleclock-remove-RISC-V-support.patch
 patch -p1 < $1/fix-mingw-complier-error.patch
+patch -p1 < $1/adapter-ohos.patch
 patch -p1 < $1/backport-CVE-2025-0838.patch
 exit 0
