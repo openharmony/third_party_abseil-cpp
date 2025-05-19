@@ -72,4 +72,5 @@ ABSL_DEFAULT_COPTS = [
   "-Wno-c++17-attribute-extensions",
   "-Wno-cast-function-type",
   "-Wno-undef",
+  "-Wno-used-but-marked-unused",
 ]
