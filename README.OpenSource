@@ -3,8 +3,8 @@
     "Name": "openEuler:abseil-cpp",
     "License": "Apache License V2.0",
     "License File": "LICENSE",
-    "Version Number": "20230802.1-5.oe2403sp1",
-    "Upstream URL": "https://www.openeuler.org",
-    "Description": "The repository contains the Abseil C++ library code. Abseil is an open-source collection of C++ code (compliant to C++11) designed to augment the C++ standard library."
+    "Version Number": "20250127.0",
+    "Upstream URL": "https://github.com/abseil/abseil-cpp",
+    "Description": "The repository contains the Abseil C++ library code. Abseil is an open-source collection of C++ code (compliant to C++17) designed to augment the C++ standard library."
   }
 ]
