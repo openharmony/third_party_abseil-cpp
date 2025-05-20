@@ -13,9 +13,9 @@ flock -x 100
 if [ -d "abseil-cpp" ];then
     rm -rf abseil-cpp
 fi
-tar zxvf abseil-cpp-20250127.0.tar.gz
+tar zxvf $2/abseil-cpp-20250127.0.tar.gz
 mv abseil-cpp-20250127.0 abseil-cpp
-cd $1/abseil-cpp
+cd abseil-cpp
 flock -u 100
-} 100<>$1/lock_file.lock
+} 100<>lock_file.lock
 exit 0
