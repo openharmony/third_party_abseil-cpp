@@ -765,6 +765,7 @@ config("cflags_config") {
     "-Wno-cast-function-type",
     "-Wno-atomic-implicit-seq-cst",
     "-Wno-used-but-marked-unused",
+    "-Wno-shadow",
   ]
 
   # Adapating DEBUG version, FIX ME
