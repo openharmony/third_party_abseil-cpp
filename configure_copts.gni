@@ -73,4 +73,5 @@ ABSL_DEFAULT_COPTS = [
   "-Wno-cast-function-type",
   "-Wno-undef",
   "-Wno-used-but-marked-unused",
+  "-Wno-shadow",
 ]
