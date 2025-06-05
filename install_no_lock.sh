@@ -14,5 +14,5 @@ fi
 tar zxvf abseil-cpp-20250127.0.tar.gz
 mv abseil-cpp-20250127.0 abseil-cpp
 cd $1/abseil-cpp
-
+patch -p1 < $1/fix-mingw-complier-error.patch
 exit 0
