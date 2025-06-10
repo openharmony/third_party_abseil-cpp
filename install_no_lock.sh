@@ -11,8 +11,8 @@ cd $1
 if [ -d "abseil-cpp" ];then
     rm -rf abseil-cpp
 fi
-tar zxvf $2/abseil-cpp-20250127.0.tar.gz
+tar zxvf abseil-cpp-20250127.0.tar.gz
 mv abseil-cpp-20250127.0 abseil-cpp
-cd abseil-cpp
-patch -p1 < $2/fix-mingw-complier-error.patch
+cd $1/abseil-cpp
+patch -p1 < $1/fix-mingw-complier-error.patch
 exit 0
