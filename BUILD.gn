@@ -15,14 +15,12 @@ import("//build/ohos.gni")
 import("./configure_copts.gni")
 
 action("abseil_cpp_action") {
-  if (is_mac || is_ios) {
+  if (host_os == "mac") {
     script = "//third_party/abseil-cpp/install_no_lock.sh"
   } else {
     script = "//third_party/abseil-cpp/install.sh"
   }
-  inputs = [
-    "//third_party/abseil-cpp/abseil-cpp-20250127.0.tar.gz",
-  ]
+  inputs = [ "//third_party/abseil-cpp/abseil-cpp-20250127.0.tar.gz" ]
   outputs = [
     "${target_gen_dir}/abseil-cpp",
     "${target_gen_dir}/abseil-cpp/absl",
@@ -255,7 +253,10 @@ action("abseil_cpp_action") {
   ]
   abseil_cpp_src_path = rebase_path("//third_party/abseil-cpp")
   abseil_cpp_gen_path = rebase_path("${target_gen_dir}", root_build_dir)
-  args = ["$abseil_cpp_gen_path", "$abseil_cpp_src_path"]
+  args = [
+    "$abseil_cpp_gen_path",
+    "$abseil_cpp_src_path",
+  ]
 }
 
 ABSEIL_DIR = rebase_path("${target_gen_dir}/abseil-cpp")
@@ -283,10 +284,10 @@ ohos_shared_library("absl_base") {
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
   deps = [
+    ":abseil_cpp_action",
     ":absl_log_severity",
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -444,7 +445,7 @@ ohos_static_library("absl_base_static") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
-  deps = [":abseil_cpp_action",]
+  deps = [ ":abseil_cpp_action" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
@@ -456,8 +457,8 @@ ohos_shared_library("absl_raw_logging_internal") {
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
   deps = [
-    ":absl_log_severity",
     ":abseil_cpp_action",
+    ":absl_log_severity",
   ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -491,6 +492,7 @@ ohos_shared_library("absl_log") {
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_hash",
     ":absl_raw_logging_internal",
@@ -501,7 +503,6 @@ ohos_shared_library("absl_log") {
     ":absl_sync",
     ":absl_time",
     ":absl_time_zone",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -514,7 +515,7 @@ ohos_shared_library("absl_log_severity") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
-  deps = [":abseil_cpp_action",]
+  deps = [ ":abseil_cpp_action" ]
   public_configs = [ ":absl_public_config" ]
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -533,7 +534,7 @@ ohos_shared_library("absl_spinlock_wait") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
-  deps = [":abseil_cpp_action",]
+  deps = [ ":abseil_cpp_action" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
@@ -545,8 +546,8 @@ ohos_shared_library("absl_throw_delegate") {
 
   cflags = ABSL_DEFAULT_COPTS
   deps = [
-    ":absl_raw_logging_internal",
     ":abseil_cpp_action",
+    ":absl_raw_logging_internal",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -577,10 +578,10 @@ ohos_shared_library("absl_stacktrace") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_raw_logging_internal",
     ":absl_symbolize",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -607,9 +608,9 @@ ohos_shared_library("absl_symbolize") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_raw_logging_internal",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -631,11 +632,11 @@ ohos_shared_library("absl_hash") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_stacktrace",
     ":absl_symbolize",
     ":absl_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -652,7 +653,7 @@ ohos_shared_library("absl_int128") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
-  deps = [ ":abseil_cpp_action", ]
+  deps = [ ":abseil_cpp_action" ]
   public_configs = [ ":absl_public_config" ]
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -676,11 +677,11 @@ ohos_shared_library("absl_status") {
 
   #deps = [ "${ABSEIL_DIR}/absl/base:absl_raw_logging_internal" ]
   deps = [
+    ":abseil_cpp_action",
     ":absl_cord",
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
     ":absl_strings",
-    ":abseil_cpp_action",
   ]
 
   install_enable = true
@@ -697,12 +698,12 @@ ohos_shared_library("absl_statusor") {
   cflags = ABSL_DEFAULT_COPTS
 
   deps = [
+    ":abseil_cpp_action",
     ":absl_cord",
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
     ":absl_status",
     ":absl_strings",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -802,10 +803,10 @@ ohos_shared_library("absl_strings") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   configs = [ ":cflags_config" ]
   deps = [
+    ":abseil_cpp_action",
     ":absl_int128",
     ":absl_raw_logging_internal",
     ":absl_strings_internal",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -825,9 +826,9 @@ ohos_shared_library("absl_strings_internal") {
   configs = [ ":cflags_config" ]
 
   deps = [
+    ":abseil_cpp_action",
     ":absl_raw_logging_internal",
     ":absl_throw_delegate",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -868,6 +869,7 @@ ohos_shared_library("absl_cord") {
   configs = [ ":cflags_config" ]
 
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
@@ -877,7 +879,6 @@ ohos_shared_library("absl_cord") {
     ":absl_sync",
     ":absl_throw_delegate",
     ":absl_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -899,9 +900,9 @@ ohos_shared_library("absl_str_format_internal") {
   configs = [ ":cflags_config" ]
 
   deps = [
+    ":abseil_cpp_action",
     ":absl_int128",
     ":absl_strings",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -935,13 +936,13 @@ ohos_shared_library("absl_sync") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
     ":absl_stacktrace",
     ":absl_symbolize",
     ":absl_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -954,7 +955,7 @@ ohos_shared_library("absl_civil_time") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   install_enable = true
   cflags = ABSL_DEFAULT_COPTS
-  deps = [ ":abseil_cpp_action", ]
+  deps = [ ":abseil_cpp_action" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
@@ -964,9 +965,9 @@ ohos_shared_library("absl_container") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_hash",
-    ":abseil_cpp_action",
   ]
 
   install_enable = true
@@ -996,8 +997,8 @@ ohos_shared_library("absl_time_zone") {
   cflags = ABSL_DEFAULT_COPTS
   include_dirs = [ "${ABSEIL_DIR}/" ]
   deps = [
-    ":absl_civil_time",
     ":abseil_cpp_action",
+    ":absl_civil_time",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -1018,13 +1019,13 @@ ohos_shared_library("absl_time") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_civil_time",
     ":absl_int128",
     ":absl_raw_logging_internal",
     ":absl_strings",
     ":absl_time_zone",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -1053,6 +1054,7 @@ ohos_shared_library("absl_flags") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_container",
     ":absl_hash",
@@ -1062,7 +1064,6 @@ ohos_shared_library("absl_flags") {
     ":absl_str_format_internal",
     ":absl_strings",
     ":absl_sync",
-    ":abseil_cpp_action",
   ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
@@ -1086,6 +1087,7 @@ ohos_shared_library("absl_random") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   deps = [
+    ":abseil_cpp_action",
     ":absl_base",
     ":absl_container",
     ":absl_hash",
@@ -1095,7 +1097,6 @@ ohos_shared_library("absl_random") {
     ":absl_str_format_internal",
     ":absl_strings",
     ":absl_sync",
-    ":abseil_cpp_action",
   ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
@@ -1109,8 +1110,8 @@ ohos_shared_library("absl_bad_optional_access") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
-    ":absl_raw_logging_internal",
     ":abseil_cpp_action",
+    ":absl_raw_logging_internal",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -1122,8 +1123,8 @@ ohos_shared_library("absl_bad_variant_access") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
-    ":absl_raw_logging_internal",
     ":abseil_cpp_action",
+    ":absl_raw_logging_internal",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
