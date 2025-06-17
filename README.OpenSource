@@ -1,6 +1,6 @@
 [
   {
-    "Name": "openEuler:abseil-cpp",
+    "Name": "abseil-cpp",
     "License": "Apache License V2.0",
     "License File": "LICENSE",
     "Version Number": "20250127.0",
