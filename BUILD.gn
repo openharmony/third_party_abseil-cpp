@@ -16,7 +16,7 @@ import("./configure_copts.gni")
 
 action("abseil_cpp_action") {
   if (is_mac || is_ios) {
-    script = "//third_party/abseil-cpp/install_no_lock.sh"
+    script = "//third_party/abseil-cpp/install_for_mac.sh"
   } else {
     script = "//third_party/abseil-cpp/install.sh"
   }
