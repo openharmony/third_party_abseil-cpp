@@ -444,6 +444,7 @@ ohos_static_library("absl_base_static") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
+  defines = [ "ARK_UI_X" ]
   deps = [":abseil_cpp_action",]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
