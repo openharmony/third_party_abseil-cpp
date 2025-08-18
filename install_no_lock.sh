@@ -9,11 +9,14 @@
 set -e
 cd $1
 if [ -d "abseil-cpp" ];then
-    rm -rf abseil-cpp
+    echo "abseil-cpp exists"
+    exit 0
 fi
 tar zxvf $2/abseil-cpp-20250127.0.tar.gz
 mv abseil-cpp-20250127.0 abseil-cpp
 cd abseil-cpp
 patch -p1 < $2/fix-mingw-complier-error.patch
+patch -p1 < $2/adapter-ohos.patch
 patch -p1 < $2/fix-mac-complier-error.patch
+sed -i '/find_library/d' ./absl/base/CMakeLists.txt
 exit 0
