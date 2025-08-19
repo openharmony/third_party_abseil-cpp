@@ -15,4 +15,6 @@ tar zxvf $2/abseil-cpp-20250127.0.tar.gz
 mv abseil-cpp-20250127.0 abseil-cpp
 cd abseil-cpp
 patch -p1 < $2/fix-mingw-complier-error.patch
+patch -p1 < $2/adapter-ohos.patch
+patch -p1 < $2/fix-mac-complier-error.patch
 exit 0

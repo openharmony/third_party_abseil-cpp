@@ -1,0 +1,158 @@
+diff --git a/absl/base/internal/low_level_alloc.cc b/absl/base/internal/low_level_alloc.cc
+index a563f7b..27b2321 100644
+--- a/absl/base/internal/low_level_alloc.cc
++++ b/absl/base/internal/low_level_alloc.cc
+@@ -42,7 +42,7 @@
+ #include <windows.h>
+ #endif
+
+-#ifdef __linux__
++#if defined __linux__ && !defined(__OHOS__)
+ #include <sys/prctl.h>
+ #endif
+
+@@ -569,7 +569,7 @@ static void *DoAllocWithArena(size_t request, LowLevelAlloc::Arena *arena) {
+         ABSL_RAW_LOG(FATAL, "mmap error: %d", errno);
+       }
+
+-#ifdef __linux__
++#if defined __linux__ && !defined(__OHOS__)
+ #if defined(PR_SET_VMA) && defined(PR_SET_VMA_ANON_NAME)
+       // Attempt to name the allocated address range in /proc/$PID/smaps on
+       // Linux.
+diff --git a/absl/crc/internal/cpu_detect.cc b/absl/crc/internal/cpu_detect.cc
+index c59f773..162ac9d 100644
+--- a/absl/crc/internal/cpu_detect.cc
++++ b/absl/crc/internal/cpu_detect.cc
+@@ -20,7 +20,7 @@
+ #include "absl/base/config.h"
+ #include "absl/types/optional.h"  // IWYU pragma: keep
+
+-#if defined(__aarch64__) && defined(__linux__)
++#if defined(__aarch64__) && defined(__linux__) && !defined(__OHOS__)
+ #include <asm/hwcap.h>
+ #include <sys/auxv.h>
+ #endif
+@@ -230,7 +230,7 @@ CpuType GetCpuType() {
+
+ bool SupportsArmCRC32PMULL() { return false; }
+
+-#elif defined(__aarch64__) && defined(__linux__)
++#elif defined(__aarch64__) && defined(__linux__) && !defined(__OHOS__)
+
+ #ifndef HWCAP_CPUID
+ #define HWCAP_CPUID (1 << 11)
+diff --git a/absl/debugging/failure_signal_handler.cc b/absl/debugging/failure_signal_handler.cc
+index d31f5a1..df8eb08 100644
+--- a/absl/debugging/failure_signal_handler.cc
++++ b/absl/debugging/failure_signal_handler.cc
+@@ -37,7 +37,7 @@
+ #endif
+ #endif
+
+-#ifdef __linux__
++#if defined __linux__ && !defined(__OHOS__)
+ #include <sys/prctl.h>
+ #endif
+
+@@ -195,7 +195,7 @@ static bool SetupAlternateStackOnce() {
+         ABSL_RAW_LOG(FATAL, "sigaltstack() failed with errno=%d", errno);
+       }
+
+-#ifdef __linux__
++#if defined __linux__ && !defined(__OHOS__)
+ #if defined(PR_SET_VMA) && defined(PR_SET_VMA_ANON_NAME)
+   // Make a best-effort attempt to name the allocated region in
+   // /proc/$PID/smaps.
+
+diff --git a/absl/debugging/internal/elf_mem_image.h b/absl/debugging/internal/elf_mem_image.h
+--- a/absl/debugging/internal/elf_mem_image.h	2025-02-03 23:50:45.000000000 +0800
++++ b/absl/debugging/internal/elf_mem_image.h	2025-08-18 15:18:23.380612537 +0800
+@@ -35,7 +35,7 @@
+ #if defined(__ELF__) && !defined(__OpenBSD__) && !defined(__QNX__) && \
+     !defined(__native_client__) && !defined(__asmjs__) &&             \
+     !defined(__wasm__) && !defined(__HAIKU__) && !defined(__sun) &&   \
+-    !defined(__VXWORKS__) && !defined(__hexagon__) && !defined(__XTENSA__)
++    !defined(__VXWORKS__) && !defined(__hexagon__) && !defined(__XTENSA__) && !defined(__OHOS__)
+ #define ABSL_HAVE_ELF_MEM_IMAGE 1
+ #endif
+
+diff --git a/absl/debugging/internal/examine_stack.cc b/absl/debugging/internal/examine_stack.cc
+index 3dd6ba1..7d5d9ca 100644
+--- a/absl/debugging/internal/examine_stack.cc
++++ b/absl/debugging/internal/examine_stack.cc
+@@ -29,11 +29,15 @@
+ #endif
+ #endif
+
++#if !defined(__OHOS__)
+ #if defined(__linux__) || defined(__APPLE__)
+ #include <sys/ucontext.h>
+ #endif
++#endif
+
++#if !defined(__OHOS__)
+ #include <csignal>
++#endif
+ #include <cstdio>
+
+ #include "absl/base/attributes.h"
+@@ -155,6 +159,7 @@ SymbolizeUrlEmitter GetDebugStackTraceHook() { return debug_stack_trace_hook; }
+ // unknown. vuc is a ucontext_t*. We use void* to avoid the use of
+ // ucontext_t on non-POSIX systems.
+ void* GetProgramCounter(void* const vuc) {
++#if !defined(__OHOS__)
+ #ifdef __linux__
+   if (vuc != nullptr) {
+     ucontext_t* context = reinterpret_cast<ucontext_t*>(vuc);
+@@ -233,6 +238,7 @@ void* GetProgramCounter(void* const vuc) {
+   return reinterpret_cast<void*>(get_user_ctx_pc(ctx));
+ #endif
+   static_cast<void>(vuc);
++#endif
+   return nullptr;
+ }
+
+diff --git a/absl/debugging/internal/stacktrace_config.h b/absl/debugging/internal/stacktrace_config.h
+index 88949fe..e982015 100644
+--- a/absl/debugging/internal/stacktrace_config.h
++++ b/absl/debugging/internal/stacktrace_config.h
+@@ -26,6 +26,10 @@
+ #if defined(ABSL_STACKTRACE_INL_HEADER)
+ #error ABSL_STACKTRACE_INL_HEADER cannot be directly set
+
++#elif defined(__OHOS__)
++#define ABSL_STACKTRACE_INL_HEADER \
++    "absl/debugging/internal/stacktrace_unimplemented-inl.inc"
++
+ #elif defined(_WIN32)
+ #define ABSL_STACKTRACE_INL_HEADER \
+    "absl/debugging/internal/stacktrace_win32-inl.inc"
+
+diff --git a/absl/base/config.h b/absl/base/config.h
+index 0b24865..257b9bb 100644
+--- a/absl/base/config.h
++++ b/absl/base/config.h
+@@ -862,7 +862,7 @@ static_assert(ABSL_INTERNAL_INLINE_NAMESPACE_STR[0] != 'h' ||
+ // available.
+ #ifdef ABSL_INTERNAL_HAS_CXA_DEMANGLE
+ #error ABSL_INTERNAL_HAS_CXA_DEMANGLE cannot be directly set
+-#elif defined(OS_ANDROID) && (defined(__i386__) || defined(__x86_64__))
++#elif defined(OS_ANDROID) && (defined(__i386__) || defined(__x86_64__)) || defined(__OHOS__)
+ #define ABSL_INTERNAL_HAS_CXA_DEMANGLE 0
+ #elif defined(__GNUC__)
+ #define ABSL_INTERNAL_HAS_CXA_DEMANGLE 1
+
+diff --git a/CMake/AbseilHelpers.cmake b/CMake/AbseilHelpers.cmake
+index d8fb9fe..02688f2 100644
+--- a/CMake/AbseilHelpers.cmake
++++ b/CMake/AbseilHelpers.cmake
+@@ -256,7 +256,7 @@ Cflags: -I\${includedir}${PC_CFLAGS}\n")
+       )
+
+     elseif(_build_type STREQUAL "static" OR _build_type STREQUAL "shared")
+-      add_library(${_NAME} "")
++      add_library(${_NAME} STATIC "")
+       target_sources(${_NAME} PRIVATE ${ABSL_CC_LIB_SRCS} ${ABSL_CC_LIB_HDRS})
+       if(APPLE)
+         set_target_properties(${_NAME} PROPERTIES
