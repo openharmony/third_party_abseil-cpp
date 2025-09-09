@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ABSEIL_DIR = get_path_info("./abseil-cpp/", "abspath")
+ABSEIL_DIR = get_path_info("//third_party/abseil-cpp/", "abspath")
 THIRDPARTY_ABSEIL_SUBSYS_NAME = "thirdparty"
 THIRDPARTY_ABSEIL_PART_NAME = "abseil-cpp"
 ABSL_DEFAULT_COPTS = [
