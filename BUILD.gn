@@ -14,252 +14,6 @@
 import("//build/ohos.gni")
 import("./configure_copts.gni")
 
-action("abseil_cpp_action") {
-  if (host_os == "mac") {
-    script = "//third_party/abseil-cpp/install_for_mac.sh"
-  } else {
-    script = "//third_party/abseil-cpp/install.sh"
-  }
-  inputs = [
-    "//third_party/abseil-cpp/abseil-cpp-20250127.0.tar.gz",
-  ]
-  outputs = [
-    "${target_gen_dir}/abseil-cpp",
-    "${target_gen_dir}/abseil-cpp/absl",
-    "${target_gen_dir}/abseil-cpp/ci",
-    "${target_gen_dir}/abseil-cpp/CMake",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/cycleclock.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/low_level_alloc.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/raw_logging.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/spinlock.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/strerror.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/sysinfo.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/thread_identity.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/throw_delegate.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/tracing.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/unscaledcycleclock.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/poison.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/scoped_set_env.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/spinlock_wait.cc",
-    "${target_gen_dir}/abseil-cpp/absl/base/log_severity.cc",
-    "${target_gen_dir}/abseil-cpp/absl/container/internal/hashtablez_sampler.cc",
-    "${target_gen_dir}/abseil-cpp/absl/container/internal/hashtablez_sampler_force_weak_definition.cc",
-    "${target_gen_dir}/abseil-cpp/absl/container/internal/raw_hash_set.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/crc32c.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/cpu_detect.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc_cord_state.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc_memcpy_fallback.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc_memcpy_x86_arm_combined.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc_non_temporal_memcpy.cc",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc_x86_arm_combined.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/failure_signal_handler.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/address_is_readable.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/decode_rust_punycode.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/demangle.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/demangle_rust.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/elf_mem_image.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/examine_stack.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stack_consumption.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/utf8_for_code_point.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/vdso_support.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/leak_check.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/stacktrace.cc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/symbolize.cc",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/city.cc",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/hash.cc",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/low_level_hash.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/die_if_null.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/globals.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/initialize.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/check_op.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/conditions.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/fnmatch.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/globals.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/log_format.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/log_message.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/log_sink_set.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/nullguard.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/proto.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/structured_proto.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/vlog_config.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/log_entry.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/log_sink.cc",
-    "${target_gen_dir}/abseil-cpp/absl/numeric/int128.cc",
-    "${target_gen_dir}/abseil-cpp/absl/profiling/internal/exponential_biased.cc",
-    "${target_gen_dir}/abseil-cpp/absl/profiling/internal/periodic_sampler.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/discrete_distribution.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/gaussian_distribution.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/pool_urbg.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen_detect.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen_hwaes.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen_round_keys.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen_slow.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/seed_material.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/seed_gen_exception.cc",
-    "${target_gen_dir}/abseil-cpp/absl/random/seed_sequences.cc",
-    "${target_gen_dir}/abseil-cpp/absl/status/internal/status_internal.cc",
-    "${target_gen_dir}/abseil-cpp/absl/status/status.cc",
-    "${target_gen_dir}/abseil-cpp/absl/status/status_payload_printer.cc",
-    "${target_gen_dir}/abseil-cpp/absl/status/statusor.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/ascii.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/charconv.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/cord.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/cord_analysis.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/cord_buffer.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/escaping.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/charconv_bigint.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/charconv_parse.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cord_internal.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cord_rep_btree.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cord_rep_btree_navigator.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cord_rep_btree_reader.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cord_rep_consume.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cord_rep_crc.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cordz_functions.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cordz_handle.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cordz_info.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/cordz_sample_token.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/damerau_levenshtein_distance.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/escaping.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/memutil.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/ostringstream.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/pow10_helper.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_format/arg.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_format/bind.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_format/extension.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_format/float_conversion.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_format/output.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_format/parser.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/stringify_sink.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/utf8.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/match.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/numbers.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/str_cat.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/str_replace.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/str_split.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/string_view.cc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/substitute.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/barrier.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/blocking_counter.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/create_thread_identity.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/futex_waiter.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/graphcycles.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/kernel_timeout.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/per_thread_sem.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/pthread_waiter.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/sem_waiter.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/stdcpp_waiter.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/waiter_base.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/win32_waiter.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/mutex.cc",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/notification.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/civil_time.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/clock.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/duration.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/format.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/civil_time_detail.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_fixed.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_format.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_if.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_impl.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_info.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_libc.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_lookup.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_posix.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/zone_info_source.cc",
-    "${target_gen_dir}/abseil-cpp/absl/time/time.cc",
-    "${target_gen_dir}/abseil-cpp/absl/types/bad_any_cast.cc",
-    "${target_gen_dir}/abseil-cpp/absl/types/bad_optional_access.cc",
-    "${target_gen_dir}/abseil-cpp/absl/types/bad_variant_access.cc",
-    "${target_gen_dir}/abseil-cpp/absl/log/absl_check.h",
-    "${target_gen_dir}/abseil-cpp/absl/log/internal/nullguard.h",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/spinlock_akaros.inc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/spinlock_linux.inc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/spinlock_posix.inc",
-    "${target_gen_dir}/abseil-cpp/absl/base/internal/spinlock_win32.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/address_is_readable.h",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/examine_stack.h",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_aarch64-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_arm-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_config.h",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_generic-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_powerpc-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_unimplemented-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_win32-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/stacktrace_x86-inl.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/stacktrace.h",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/internal/symbolize.h",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/symbolize.h",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/symbolize_darwin.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/symbolize_elf.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/symbolize_unimplemented.inc",
-    "${target_gen_dir}/abseil-cpp/absl/debugging/symbolize_win32.inc",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/city.h",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/hash.h",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/low_level_hash.h",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/print_hash_of.cc",
-    "${target_gen_dir}/abseil-cpp/absl/hash/internal/spy_hash_state.h",
-    "${target_gen_dir}/abseil-cpp/absl/numeric/int128_have_intrinsic.inc",
-    "${target_gen_dir}/abseil-cpp/absl/numeric/int128_no_intrinsic.inc",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/charconv_bigint.h",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/charconv_parse.h",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/memutil.h",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/stl_type_traits.h",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_join_internal.h",
-    "${target_gen_dir}/abseil-cpp/absl/strings/internal/str_split_internal.h",
-    "${target_gen_dir}/abseil-cpp/absl/strings/str_cat.h",
-    "${target_gen_dir}/abseil-cpp/absl/crc/crc32c.h",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc32c.h",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc32c_inline.h",
-    "${target_gen_dir}/abseil-cpp/absl/crc/internal/crc_memcpy.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/barrier.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/blocking_counter.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/create_thread_identity.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/futex.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/futex_waiter.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/graphcycles.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/kernel_timeout.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/per_thread_sem.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/internal/waiter_base.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/mutex.h",
-    "${target_gen_dir}/abseil-cpp/absl/synchronization/notification.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_fixed.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_if.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_impl.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_info.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_libc.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/time_zone_posix.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/cctz/src/tzfile.h",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/get_current_time_chrono.inc",
-    "${target_gen_dir}/abseil-cpp/absl/time/internal/get_current_time_posix.inc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/commandlineflag.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/commandlineflag.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/commandlineflag.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/commandlineflag.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/flag.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/flag.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/private_handle_accessor.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/private_handle_accessor.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/program_name.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/internal/program_name.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/marshalling.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/marshalling.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/reflection.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/reflection.h",
-    "${target_gen_dir}/abseil-cpp/absl/flags/usage_config.cc",
-    "${target_gen_dir}/abseil-cpp/absl/flags/usage_config.h",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen.h",
-    "${target_gen_dir}/abseil-cpp/absl/random/internal/randen_slow.h",
-  ]
-  abseil_cpp_src_path = rebase_path("//third_party/abseil-cpp")
-  abseil_cpp_gen_path = rebase_path("${target_gen_dir}", root_build_dir)
-  args = ["$abseil_cpp_gen_path", "$abseil_cpp_src_path"]
-}
-
-ABSEIL_DIR = rebase_path("${target_gen_dir}/abseil-cpp")
-
 config("absl_public_config") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
 }
@@ -277,16 +31,13 @@ ohos_shared_library("absl_base") {
     "${ABSEIL_DIR}/absl/base/internal/tracing.cc",
     "${ABSEIL_DIR}/absl/base/internal/unscaledcycleclock.cc",
   ]
-
   include_dirs = [ "${ABSEIL_DIR}/" ]
-
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
   deps = [
     ":absl_log_severity",
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -444,7 +195,6 @@ ohos_static_library("absl_base_static") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
-  deps = [":abseil_cpp_action",]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
@@ -457,7 +207,6 @@ ohos_shared_library("absl_raw_logging_internal") {
   public_configs = [ ":absl_public_config" ]
   deps = [
     ":absl_log_severity",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -501,7 +250,6 @@ ohos_shared_library("absl_log") {
     ":absl_sync",
     ":absl_time",
     ":absl_time_zone",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -514,7 +262,6 @@ ohos_shared_library("absl_log_severity") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
-  deps = [":abseil_cpp_action",]
   public_configs = [ ":absl_public_config" ]
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -533,7 +280,6 @@ ohos_shared_library("absl_spinlock_wait") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
-  deps = [":abseil_cpp_action",]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
@@ -546,7 +292,6 @@ ohos_shared_library("absl_throw_delegate") {
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_raw_logging_internal",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -580,7 +325,6 @@ ohos_shared_library("absl_stacktrace") {
     ":absl_base",
     ":absl_raw_logging_internal",
     ":absl_symbolize",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -609,7 +353,6 @@ ohos_shared_library("absl_symbolize") {
   deps = [
     ":absl_base",
     ":absl_raw_logging_internal",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -635,7 +378,6 @@ ohos_shared_library("absl_hash") {
     ":absl_stacktrace",
     ":absl_symbolize",
     ":absl_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -652,7 +394,6 @@ ohos_shared_library("absl_int128") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
   install_enable = true
-  deps = [ ":abseil_cpp_action", ]
   public_configs = [ ":absl_public_config" ]
   innerapi_tags = [ "platformsdk_indirect" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -680,7 +421,6 @@ ohos_shared_library("absl_status") {
     ":absl_raw_logging_internal",
     ":absl_spinlock_wait",
     ":absl_strings",
-    ":abseil_cpp_action",
   ]
 
   install_enable = true
@@ -702,7 +442,6 @@ ohos_shared_library("absl_statusor") {
     ":absl_spinlock_wait",
     ":absl_status",
     ":absl_strings",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -805,7 +544,6 @@ ohos_shared_library("absl_strings") {
     ":absl_int128",
     ":absl_raw_logging_internal",
     ":absl_strings_internal",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -821,13 +559,10 @@ ohos_shared_library("absl_strings_internal") {
     "${ABSEIL_DIR}/absl/strings/internal/utf8.cc",
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
-
   configs = [ ":cflags_config" ]
-
   deps = [
     ":absl_raw_logging_internal",
     ":absl_throw_delegate",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   innerapi_tags = [ "platformsdk_indirect" ]
@@ -877,7 +612,6 @@ ohos_shared_library("absl_cord") {
     ":absl_sync",
     ":absl_throw_delegate",
     ":absl_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -901,7 +635,6 @@ ohos_shared_library("absl_str_format_internal") {
   deps = [
     ":absl_int128",
     ":absl_strings",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -941,7 +674,6 @@ ohos_shared_library("absl_sync") {
     ":absl_stacktrace",
     ":absl_symbolize",
     ":absl_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -954,7 +686,6 @@ ohos_shared_library("absl_civil_time") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   install_enable = true
   cflags = ABSL_DEFAULT_COPTS
-  deps = [ ":abseil_cpp_action", ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
 }
@@ -966,7 +697,6 @@ ohos_shared_library("absl_container") {
   deps = [
     ":absl_base",
     ":absl_hash",
-    ":abseil_cpp_action",
   ]
 
   install_enable = true
@@ -997,7 +727,6 @@ ohos_shared_library("absl_time_zone") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
   deps = [
     ":absl_civil_time",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -1024,7 +753,6 @@ ohos_shared_library("absl_time") {
     ":absl_raw_logging_internal",
     ":absl_strings",
     ":absl_time_zone",
-    ":abseil_cpp_action",
   ]
   public_configs = [ ":absl_public_config" ]
   install_enable = true
@@ -1062,7 +790,6 @@ ohos_shared_library("absl_flags") {
     ":absl_str_format_internal",
     ":absl_strings",
     ":absl_sync",
-    ":abseil_cpp_action",
   ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
@@ -1095,7 +822,6 @@ ohos_shared_library("absl_random") {
     ":absl_str_format_internal",
     ":absl_strings",
     ":absl_sync",
-    ":abseil_cpp_action",
   ]
   cflags = ABSL_DEFAULT_COPTS
   public_configs = [ ":absl_public_config" ]
@@ -1110,7 +836,6 @@ ohos_shared_library("absl_bad_optional_access") {
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_raw_logging_internal",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
@@ -1123,7 +848,6 @@ ohos_shared_library("absl_bad_variant_access") {
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_raw_logging_internal",
-    ":abseil_cpp_action",
   ]
   install_enable = true
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
