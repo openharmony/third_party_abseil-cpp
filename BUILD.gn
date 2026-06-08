@@ -194,6 +194,9 @@ ohos_static_library("absl_base_static") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
+  if (is_mingw) {
+    cflags_cc = [ "-std=c++17" ]
+  }
   public_configs = [ ":absl_public_config" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
