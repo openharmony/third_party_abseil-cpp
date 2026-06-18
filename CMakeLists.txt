@@ -25,6 +25,11 @@ endif (POLICY CMP0141)
 
 project(absl LANGUAGES CXX VERSION 20250127)
 set(ABSL_SOVERSION "2501.0.0")
+
+# Enforce C++17 standard for Protobuf 6.x compatibility
+set(CMAKE_CXX_STANDARD 17 CACHE STRING "C++ standard")
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 include(CTest)
 
 # Output directory is correct by default for most build setups. However, when
