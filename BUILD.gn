@@ -16,6 +16,7 @@ import("./configure_copts.gni")
 
 config("absl_public_config") {
   include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags_cc = [ "-std=c++17" ]
 }
 
 ohos_shared_library("absl_base") {
@@ -194,9 +195,7 @@ ohos_static_library("absl_base_static") {
   ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
-  if (is_mingw) {
-    cflags_cc = [ "-std=c++17" ]
-  }
+
   public_configs = [ ":absl_public_config" ]
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -454,6 +453,7 @@ ohos_shared_library("absl_statusor") {
 }
 
 config("cflags_config") {
+  cflags_cc = [ "-std=c++17" ]
   cflags = [
     "-Wall",
     "-Wextra",
@@ -688,6 +688,7 @@ ohos_shared_library("absl_civil_time") {
   sources = [ "${ABSEIL_DIR}/absl/time/internal/cctz/src/civil_time_detail.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   install_enable = true
+  cflags_cc = [ "-std=c++17" ]
   cflags = ABSL_DEFAULT_COPTS
   subsystem_name = "${THIRDPARTY_ABSEIL_SUBSYS_NAME}"
   part_name = "${THIRDPARTY_ABSEIL_PART_NAME}"
@@ -696,6 +697,7 @@ ohos_shared_library("absl_civil_time") {
 ohos_shared_library("absl_container") {
   sources = [ "${ABSEIL_DIR}/absl/container/internal/raw_hash_set.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags_cc = [ "-std=c++17" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_base",
@@ -836,6 +838,7 @@ ohos_shared_library("absl_random") {
 ohos_shared_library("absl_bad_optional_access") {
   sources = [ "${ABSEIL_DIR}/absl/types/bad_optional_access.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags_cc = [ "-std=c++17" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_raw_logging_internal",
@@ -848,6 +851,7 @@ ohos_shared_library("absl_bad_optional_access") {
 ohos_shared_library("absl_bad_variant_access") {
   sources = [ "${ABSEIL_DIR}/absl/types/bad_variant_access.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
+  cflags_cc = [ "-std=c++17" ]
   cflags = ABSL_DEFAULT_COPTS
   deps = [
     ":absl_raw_logging_internal",
