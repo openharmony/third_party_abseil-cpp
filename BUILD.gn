@@ -20,6 +20,7 @@ config("absl_public_config") {
 }
 
 ohos_shared_library("absl_base") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/base/internal/cycleclock.cc",
     "${ABSEIL_DIR}/absl/base/internal/low_level_alloc.cc",
@@ -46,6 +47,7 @@ ohos_shared_library("absl_base") {
 }
 
 ohos_static_library("absl_base_static") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/base/internal/cycleclock.cc",
     "${ABSEIL_DIR}/absl/base/internal/low_level_alloc.cc",
@@ -260,6 +262,7 @@ ohos_shared_library("absl_log") {
 }
 
 ohos_shared_library("absl_log_severity") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/base/log_severity.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags = ABSL_DEFAULT_COPTS
@@ -271,6 +274,7 @@ ohos_shared_library("absl_log_severity") {
 }
 
 ohos_shared_library("absl_spinlock_wait") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/base/internal/spinlock_akaros.inc",
     "${ABSEIL_DIR}/absl/base/internal/spinlock_linux.inc",
@@ -287,6 +291,7 @@ ohos_shared_library("absl_spinlock_wait") {
 }
 
 ohos_shared_library("absl_throw_delegate") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/base/internal/throw_delegate.cc" ]
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
@@ -303,6 +308,7 @@ ohos_shared_library("absl_throw_delegate") {
 }
 
 ohos_shared_library("absl_stacktrace") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/debugging/internal/address_is_readable.cc",
     "${ABSEIL_DIR}/absl/debugging/internal/address_is_readable.h",
@@ -335,6 +341,7 @@ ohos_shared_library("absl_stacktrace") {
 }
 
 ohos_shared_library("absl_symbolize") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/debugging/internal/decode_rust_punycode.cc",
     "${ABSEIL_DIR}/absl/debugging/internal/demangle.cc",
@@ -363,6 +370,7 @@ ohos_shared_library("absl_symbolize") {
 }
 
 ohos_shared_library("absl_hash") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/hash/internal/city.cc",
     "${ABSEIL_DIR}/absl/hash/internal/city.h",
@@ -388,6 +396,7 @@ ohos_shared_library("absl_hash") {
 }
 
 ohos_shared_library("absl_int128") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/numeric/int128.cc",
     "${ABSEIL_DIR}/absl/numeric/int128_have_intrinsic.inc",
@@ -403,6 +412,7 @@ ohos_shared_library("absl_int128") {
 }
 
 ohos_shared_library("absl_status") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/base/internal/strerror.cc",
     "${ABSEIL_DIR}/absl/debugging/leak_check.cc",
@@ -432,6 +442,7 @@ ohos_shared_library("absl_status") {
 }
 
 ohos_shared_library("absl_statusor") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/status/statusor.cc" ]
 
   include_dirs = [ "${ABSEIL_DIR}/" ]
@@ -574,6 +585,7 @@ ohos_shared_library("absl_strings_internal") {
 }
 
 ohos_shared_library("absl_cord") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/crc/crc32c.cc",
     "${ABSEIL_DIR}/absl/crc/crc32c.h",
@@ -623,6 +635,7 @@ ohos_shared_library("absl_cord") {
 }
 
 ohos_shared_library("absl_str_format_internal") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/strings/internal/str_format/arg.cc",
     "${ABSEIL_DIR}/absl/strings/internal/str_format/bind.cc",
@@ -645,6 +658,7 @@ ohos_shared_library("absl_str_format_internal") {
 }
 
 ohos_shared_library("absl_sync") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/synchronization/barrier.cc",
     "${ABSEIL_DIR}/absl/synchronization/barrier.h",
@@ -685,6 +699,7 @@ ohos_shared_library("absl_sync") {
 }
 
 ohos_shared_library("absl_civil_time") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/time/internal/cctz/src/civil_time_detail.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   install_enable = true
@@ -695,6 +710,7 @@ ohos_shared_library("absl_civil_time") {
 }
 
 ohos_shared_library("absl_container") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/container/internal/raw_hash_set.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags_cc = [ "-std=c++17" ]
@@ -710,6 +726,7 @@ ohos_shared_library("absl_container") {
 }
 
 ohos_shared_library("absl_time_zone") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_fixed.cc",
     "${ABSEIL_DIR}/absl/time/internal/cctz/src/time_zone_fixed.h",
@@ -740,6 +757,7 @@ ohos_shared_library("absl_time_zone") {
 }
 
 ohos_shared_library("absl_time") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/time/civil_time.cc",
     "${ABSEIL_DIR}/absl/time/clock.cc",
@@ -766,6 +784,7 @@ ohos_shared_library("absl_time") {
 }
 
 ohos_shared_library("absl_flags") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/flags/commandlineflag.cc",
     "${ABSEIL_DIR}/absl/flags/commandlineflag.h",
@@ -804,6 +823,7 @@ ohos_shared_library("absl_flags") {
 }
 
 ohos_shared_library("absl_random") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "${ABSEIL_DIR}/absl/random/internal/pool_urbg.cc",
     "${ABSEIL_DIR}/absl/random/internal/randen.cc",
@@ -836,6 +856,7 @@ ohos_shared_library("absl_random") {
 }
 
 ohos_shared_library("absl_bad_optional_access") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/types/bad_optional_access.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags_cc = [ "-std=c++17" ]
@@ -849,6 +870,7 @@ ohos_shared_library("absl_bad_optional_access") {
 }
 
 ohos_shared_library("absl_bad_variant_access") {
+  branch_protector_ret = "pac_ret"
   sources = [ "${ABSEIL_DIR}/absl/types/bad_variant_access.cc" ]
   include_dirs = [ "${ABSEIL_DIR}/" ]
   cflags_cc = [ "-std=c++17" ]
