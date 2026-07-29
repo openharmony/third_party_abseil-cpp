@@ -14,7 +14,6 @@
 # limitations under the License.
 #
 
-find_library(LIBRT rt)
 
 # Internal-only target, do not depend on directly.
 absl_cc_library(
