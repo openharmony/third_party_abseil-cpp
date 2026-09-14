@@ -1,0 +1,16 @@
+{
+  global:
+    *AbslInternal*;
+    __emutls_v._ZN4absl*;
+    _ZN4absl*;
+    _ZNK4absl*;
+    _ZNR4absl*;
+    _ZNO4absl*;
+    _ZNKR4absl*;
+    _ZNKO4absl*;
+    _ZTVN4absl*;
+    _ZTIN4absl*;
+    _ZTSN4absl*;
+  local:
+    *;
+};
